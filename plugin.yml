@@ -1,0 +1,7 @@
+name: MOTDManager
+version: 1.1
+main: core.Core
+author: _lloydpl_
+
+commands:
+  motdmanager:
