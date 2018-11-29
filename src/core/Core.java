@@ -46,16 +46,41 @@ public class Core extends JavaPlugin implements Listener {
 			} else if(args[0].equalsIgnoreCase("check")) {
 				sender.sendMessage(color("Wartosci w configu MOTDManagera:"));
 				sender.sendMessage("Ingerencja: " + String.valueOf(change));
-				sender.sendMessage("MOTD:");
-				sender.sendMessage(" - "+color(line1));
-				sender.sendMessage(" - "+color(line2));
-				sender.sendMessage("Wersja:");
-				sender.sendMessage(" - "+color(version));
-				sender.sendMessage("Gracze:");
-				sender.sendMessage(" - "+String.valueOf(online)+"/"+String.valueOf(max));
-				sender.sendMessage("Hover:");
-				for(String line : hover) 
-					sender.sendMessage(" - "+color(line));
+				if(line1 != null || line2 != null) {
+					sender.sendMessage("MOTD:");
+					if(line1 != null)
+						sender.sendMessage(" - "+color(line1));
+					else
+						sender.sendMessage(" -");
+					if(line2 != null)
+						sender.sendMessage(" - "+color(line2));
+					else
+						sender.sendMessage(" -");
+				} else
+					sender.sendMessage("MOTD:BRAK_INGERENCJI");
+				if(version != null)
+					sender.sendMessage("Wersja: "+color(version)); 
+				else
+					sender.sendMessage("Wersja:BRAK_INGERENCJI");
+				if(online != null || max != null) {
+					String o, m;
+					if(online != null)
+						o = String.valueOf(online);
+					else
+						o = "real";
+					if(max != null)
+						m = String.valueOf(max);
+					else
+						m = "real";
+					sender.sendMessage("Gracze: "+o+"/"+m);
+				} else
+					sender.sendMessage("Gracze:BRAK_INGERENCJI");
+				if(hover != null) {
+					sender.sendMessage("Hover:");
+					for(String line : hover) 
+						sender.sendMessage(" - "+color(line));
+				} else
+					sender.sendMessage("Hover:BRAK_INGERENCJI");
 			}
 		}
 		return false;
@@ -63,7 +88,7 @@ public class Core extends JavaPlugin implements Listener {
 	
 	private String line1, line2, version;
 	private List<String> hover;
-	private int online, max;
+	private Integer online, max;
 	private boolean change = false;
 	private Plugin inst;
 	
@@ -80,16 +105,37 @@ public class Core extends JavaPlugin implements Listener {
 	}
 	
 	private void reloadCfg() {
-		inst.saveDefaultConfig();
+		this.saveDefaultConfig();
 		inst.reloadConfig();
 		FileConfiguration cfg = inst.getConfig();
-		this.line1 = cfg.getString("line1");
-		this.line2 = cfg.getString("line2");
-		this.version = cfg.getString("version");
-		this.hover = cfg.getStringList("hover");
-		this.online = cfg.getInt("online");
-		this.max = cfg.getInt("max");
-		this.change = cfg.getBoolean("enable");
+		if(cfg.isSet("line1"))
+			this.line1 = cfg.getString("line1");
+		else
+			this.line1 = null;
+		if(cfg.isSet("line2"))
+			this.line2 = cfg.getString("line2");
+		else
+			this.line2 = null;
+		if(cfg.isSet("version"))
+			this.version = cfg.getString("version");
+		else
+			this.version = null;
+		if(cfg.isSet("hover"))
+			this.hover = cfg.getStringList("hover");
+		else
+			this.hover = null;
+		if(cfg.isSet("online"))
+			this.online = cfg.getInt("online");
+		else
+			this.online = null;
+		if(cfg.isSet("max"))
+			this.max = cfg.getInt("max");
+		else
+			this.max = null;
+		if(cfg.isSet("enable"))
+			this.change = cfg.getBoolean("enable");
+		else
+			this.change = false;
 	}
 	
 	public String color(String s) {
