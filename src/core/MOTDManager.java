@@ -302,7 +302,8 @@ public class MOTDManager implements Listener {
                 Reflection.getField(playersample.getClass(), "a", int.class).set(playersample, ev.getMax());
                 Reflection.getField(playersample.getClass(), "b", int.class).set(playersample, ev.getOnline());
                 if(ev.getHover() != null) Reflection.getField(playersample.getClass(), "c", GameProfile[].class).set(playersample, getHover(ev.getHover()));
-                if(ev.getMotdLine1() != null) motdClass.set(ping, motdInvoker.invoke(color(ev.getMotdLine1() + "\n" + ev.getMotdLine2())));
+                if(ev.getMotdLine1() != null || ev.getMotdLine2() != null) motdClass.set(ping, motdInvoker.invoke(
+                	color(((ev.getMotdLine1() == null) ? "" : ev.getMotdLine1()) + "\n" + ((ev.getMotdLine2() == null) ? "" : ev.getMotdLine2()))));
                 if(ev.getVersionEdit() != null) serverClass.set(ping, serverInvoker.invoke(color(ev.getVersionEdit()), 0));
                 
                 return packet;
