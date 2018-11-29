@@ -218,22 +218,6 @@ public class MOTDManager implements Listener {
                 public final void onPluginDisable(PluginDisableEvent e) {
                     if (e.getPlugin().equals(plugin)) {
                     	try {
-	                        HandlerList.unregisterAll();
-	                        for(Channel c: channelLookup.values()) {
-	                        	try {
-	                        		c.deregister();
-	                        		c.close();
-	                        		c.disconnect();
-	                        	} catch(Exception ex) {}
-	                        }
-	                        for(Channel c: uninjectedChannels) {
-	                        	try {
-	                        		c.deregister();
-	                        		c.close();
-	                        		c.disconnect();
-	                        	} catch(Exception ex) {}
-	                        }
-	
 	                		for (Channel serverChannel : serverChannels) {
 	                			final ChannelPipeline pipeline = serverChannel.pipeline();
 	                			try {
