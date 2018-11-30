@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import core.MOTDManager.ServerPingEvent;
@@ -20,7 +19,6 @@ public class Core extends JavaPlugin implements Listener {
 		this.getLogger().info("Uruchamianie pluginu MOTDManager...");
 		new MOTDManager(this);
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
-		this.inst = this;
 		reloadCfg();
 		this.getLogger().info("Plugin zostal pomyslnie uruchomiony!");
 		if(change) {
@@ -90,7 +88,6 @@ public class Core extends JavaPlugin implements Listener {
 	private List<String> hover;
 	private Integer online, max;
 	private boolean change = false;
-	private Plugin inst;
 	
 	@EventHandler
 	public void onServerPing(ServerPingEvent ev) {
@@ -106,8 +103,8 @@ public class Core extends JavaPlugin implements Listener {
 	
 	private void reloadCfg() {
 		this.saveDefaultConfig();
-		inst.reloadConfig();
-		FileConfiguration cfg = inst.getConfig();
+		this.reloadConfig();
+		FileConfiguration cfg = this.getConfig();
 		if(cfg.isSet("line1"))
 			this.line1 = cfg.getString("line1");
 		else
