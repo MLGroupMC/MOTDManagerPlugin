@@ -108,7 +108,7 @@ public class MOTDManager implements Listener {
                     return Class.forName(nms + ".IChatBaseComponent$ChatSerializer");
                 }
             } catch(ClassNotFoundException ex) {
-                System.out.println("Nie znalaziono klasy: " + name);
+                System.out.println("Class not found: " + name);
             }
             return null;
         }
