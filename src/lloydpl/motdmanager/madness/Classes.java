@@ -32,7 +32,7 @@ public class Classes {
                 return Class.forName(nms + ".IChatBaseComponent$ChatSerializer");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Class not found: " + name);
+            Main.getInst().getLogger().log(Level.SEVERE, "Class not found: " + name);
         }
         return null;
     }
