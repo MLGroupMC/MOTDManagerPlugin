@@ -3,7 +3,7 @@ package lloydpl.motdmanager.madness;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
-public class MOTDManager implements Listener {
+public class MOTDManager {
 
     public MOTDManager(Plugin p) {
         try {
