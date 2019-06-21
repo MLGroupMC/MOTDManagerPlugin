@@ -9,7 +9,7 @@ public class MOTDManager {
         try {
             new TinyProtocol(p);
         } catch (Exception ex) {
-            System.out.print("MOTDManager encountered unhandled exception! " + ex);
+            Main.getInst().getLogger().log(Level.SEVERE, "MOTDManager encountered unhandled exception! ", ex);
         }
     }
 
