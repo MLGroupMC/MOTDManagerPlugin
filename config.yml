@@ -11,13 +11,15 @@ version: '&cCustomVersion'
 #Customowa ilosc graczy
 online: 10
 max: 20
+#Fake players zawyża ilość graczy online o podaną ilość, gdy = 0 customowa ilość działa spowrotem
+fakeplayers: 0
 
 #Customowa lista graczy po najechaniu na ilonke z sygnalem
 hover:
   - '&4line 1'
   - '&5line 2'
   - '&6line 3'
-  
+
 #Wazne notki:
 #1) Gdy jest ustawiona customowa wersja to nie pokaze sie customowa ilosc graczy
 #2) Przy zmianie ilosci graczy do listy hover dopisywana jest linijka z tekstem "...and N more..."

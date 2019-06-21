@@ -1,6 +1,6 @@
 name: MOTDManager
-version: 1.2
-main: core.Core
+version: 2.2
+main: Main
 author: _lloydpl_
 
 commands:
