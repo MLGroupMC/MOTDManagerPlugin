@@ -17,8 +17,8 @@ import static lloydpl.motdmanager.Util.color;
 public class Main extends JavaPlugin implements Listener {
 
 	public void onEnable() {
-		inst = this;
 		this.getLogger().info("Uruchamianie pluginu MOTDManager...");
+		inst = this;
 		new MOTDManager(this);
 		new Metrics(this);
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
@@ -47,43 +47,33 @@ public class Main extends JavaPlugin implements Listener {
 			} else if(args[0].equalsIgnoreCase("check")) {
 				sender.sendMessage(color("Wartosci w configu MOTDManagera:"));
 				sender.sendMessage("Ingerencja: "+change);
+
+				/*MOTD*/
 				if(line1 != null || line2 != null) {
 					sender.sendMessage("MOTD:");
-					if(line1 != null)
-						sender.sendMessage(" - "+color(line1));
-					else
-						sender.sendMessage(" -");
-					if(line2 != null)
-						sender.sendMessage(" - "+color(line2));
-					else
-						sender.sendMessage(" -");
+					sender.sendMessage(" - "+((line1 != null) ? color(line1) : ""));
+					sender.sendMessage(" - "+((line2 != null) ? color(line2) : ""));
 				} else
-					sender.sendMessage("MOTD:BRAK_INGERENCJI");
-				if(version != null)
-					sender.sendMessage("Wersja: "+color(version)); 
-				else
-					sender.sendMessage("Wersja:BRAK_INGERENCJI");
+					sender.sendMessage("MOTD: BRAK INGERENCJI");
+
+				/*Wersja*/
+				sender.sendMessage("Wersja: "+((version != null) ? color(version) : "BRAK INGERENCJI"));
+
+				/*Gracze*/
 				if(online != null || max != null || fake != null) {
-					String o, m;
-					if(online != null)
-						o = String.valueOf(online);
-					else if(fake != 0)
-						o = "zawyzone o "+fake;
-					else
-						o = "real";
-					if(max != null)
-						m = String.valueOf(max);
-					else
-						m = "real";
+					String o = (online != null) ? String.valueOf(online) : ((fake != 0) ? "zawyzone o "+fake : "real");
+					String m = (max != null) ? String.valueOf(max) : "real";
 					sender.sendMessage("Gracze: "+o+"/"+m);
 				} else
-					sender.sendMessage("Gracze:BRAK_INGERENCJI");
+					sender.sendMessage("Gracze: BRAK INGERENCJI");
+
+				/*Lista hover*/
 				if(hover != null) {
 					sender.sendMessage("Hover:");
 					for(String line : hover) 
 						sender.sendMessage(" - "+color(line));
 				} else
-					sender.sendMessage("Hover:BRAK_INGERENCJI");
+					sender.sendMessage("Hover: BRAK INGERENCJI");
 			}
 		}
 		return false;
@@ -98,56 +88,33 @@ public class Main extends JavaPlugin implements Listener {
 	private List<String> hover;
 	private Integer online, max, fake;
 	private boolean change = false;
-	
-	@EventHandler
-	public void onServerPing(ServerPingEvent ev) {
-		if(change) {
-			ev.setMotdLine1(line1);
-			ev.setMotdLine2(line2);
-			ev.setVersion(version);
-			ev.setOnline(online);
-			ev.setMax(max);
-			ev.setFakePlayers(fake);
-			ev.setHover(hover);
-		}
-	}
-	
+
 	private void reloadCfg() {
 		this.saveDefaultConfig();
 		this.reloadConfig();
 		FileConfiguration cfg = this.getConfig();
-		if(cfg.isSet("line1"))
-			this.line1 = cfg.getString("line1");
-		else
-			this.line1 = null;
-		if(cfg.isSet("line2"))
-			this.line2 = cfg.getString("line2");
-		else
-			this.line2 = null;
-		if(cfg.isSet("version"))
-			this.version = cfg.getString("version");
-		else
-			this.version = null;
-		if(cfg.isSet("hover"))
-			this.hover = cfg.getStringList("hover");
-		else
-			this.hover = null;
-		if(cfg.isSet("online"))
-			this.online = cfg.getInt("online");
-		else
-			this.online = null;
-		if(cfg.isSet("online"))
-			this.fake = cfg.getInt("fakeplayers");
-		else
-			this.fake = null;
-		if(cfg.isSet("max"))
-			this.max = cfg.getInt("max");
-		else
-			this.max = null;
-		if(cfg.isSet("enable"))
-			this.change = cfg.getBoolean("enable");
-		else
-			this.change = false;
+
+		this.line1 = (cfg.isSet("line1")) ? cfg.getString("line1") : null;
+		this.line2 = (cfg.isSet("line2")) ? cfg.getString("line2") : null;
+		this.version = (cfg.isSet("version")) ? cfg.getString("version") : null;
+		this.hover = (cfg.isSet("hover")) ? cfg.getStringList("hover") : null;
+		this.online = (cfg.isSet("online")) ? cfg.getInt("online") : null;
+		this.fake = (cfg.isSet("online")) ? cfg.getInt("fakeplayers") : null;
+		this.max = (cfg.isSet("max")) ? cfg.getInt("max") : null;
+		this.change = (cfg.isSet("enable")) && cfg.getBoolean("enable");
+	}
+
+	@EventHandler
+	public void onServerPing(ServerPingEvent ev) {
+		if(!change)
+			return;
+		ev.setMotdLine1(line1);
+		ev.setMotdLine2(line2);
+		ev.setVersion(version);
+		ev.setOnline(online);
+		ev.setMax(max);
+		ev.setFakePlayers(fake);
+		ev.setHover(hover);
 	}
 
 }
