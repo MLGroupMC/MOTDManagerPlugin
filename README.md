@@ -9,7 +9,7 @@ Prosty plugin pozwalający na zmiane dowolnych wyświetlanych wartości na MOTD 
 	
 	/motdmanager help - Wyświetla pomoc dot. komend
 
-	skript:
+	skript: (wszystko działa tylko w evencie On server pinging:)
 	
 		events:
 		
