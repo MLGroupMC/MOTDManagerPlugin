@@ -1,6 +1,9 @@
 #Czy MOTD ma byc zmieniane
 enable: true
 
+#Czy MOTD ma być zmieniane według configu, czy skriptem
+skript-mode: false
+
 #Linia 1 i 2 MOTD
 line1: '&aSampleLine1'
 line2: '&bSampleLine2'
