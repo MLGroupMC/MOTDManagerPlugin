@@ -1,28 +1,28 @@
 # MOTDManagerPlugin
-Prosty plugin pozwalający na zmiane dowolnych wyświetlanych wartości na MOTD serwera\n
-\n
-komendy:\n
-/motdmanager reload - Przeładowuje config\n
-/motdmanager check - Wyświetla załadowane wartości z configu\n
-/motdmanager help - Wyświetla pomoc dot. komend\n
+Prosty plugin pozwalający na zmiane dowolnych wyświetlanych wartości na MOTD serwera
+
+komendy:
+/motdmanager reload - Przeładowuje config
+/motdmanager check - Wyświetla załadowane wartości z configu
+/motdmanager help - Wyświetla pomoc dot. komend
 
 skript:
-  events:
-    server pinging
-  effects:
-    set motd fake player amount to %integer%");
-    set motd hover to %string%");
-    set motd line %integer% to %integer%");
-    set motd max player amount to %integer%");
-    set motd version to %string%");
-  expressions:
-    address of pinging person
-    hover
-    motd line %integer%
-    max player(|s) amount
-    online player(|s) amount
-    motd edited version
-    motd original version
+	events:
+		server pinging
+	effects:
+		set motd fake player amount to %integer%");
+		set motd hover to %string%");
+		set motd line %integer% to %integer%");
+		set motd max player amount to %integer%");
+		set motd version to %string%");
+	expressions:
+		address of pinging person
+		hover
+		motd line %integer%
+		max player(|s) amount
+		online player(|s) amount
+		motd edited version
+		motd original version
 
 config:
 #Czy MOTD ma byc zmieniane
@@ -46,9 +46,9 @@ fakeplayers: 0
 
 #Customowa lista graczy po najechaniu na ilonke z sygnalem
 hover:
-  - '&4line 1'
-  - '&5line 2'
-  - '&6line 3'
+	- '&4line 1'
+	- '&5line 2'
+	- '&6line 3'
 
 #Wazne notki:
 #1) Gdy jest ustawiona customowa wersja to nie pokaze sie customowa ilosc graczy
