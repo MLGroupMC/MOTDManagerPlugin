@@ -1,10 +1,10 @@
 # MOTDManagerPlugin
-Prosty plugin pozwalający na zmiane dowolnych wyświetlanych wartości na MOTD serwera
-
-komendy:
-/motdmanager reload - Przeładowuje config
-/motdmanager check - Wyświetla załadowane wartości z configu
-/motdmanager help - Wyświetla pomoc dot. komend
+Prosty plugin pozwalający na zmiane dowolnych wyświetlanych wartości na MOTD serwera\n
+\n
+komendy:\n
+/motdmanager reload - Przeładowuje config\n
+/motdmanager check - Wyświetla załadowane wartości z configu\n
+/motdmanager help - Wyświetla pomoc dot. komend\n
 
 skript:
   events:
