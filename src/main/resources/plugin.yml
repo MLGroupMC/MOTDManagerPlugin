@@ -1,0 +1,7 @@
+name: MOTDManager
+version: 2.4
+main: lloydpl.motdmanager.MOTDManagerPlugin
+author: _lloydpl_
+
+commands:
+  motdmanager:
